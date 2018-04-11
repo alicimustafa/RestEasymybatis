@@ -1,0 +1,23 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace= "mappers.FilmMapper">
+
+	<resultMap id="result" type="Film">
+		<result property="id" column="id" />
+		<result property="title" column="title" />
+		<result property="description" column="description" />
+		<result property="releaseYear" column="release_year" />
+		<result property="languageId" column="language_id" />
+		<result property="rentalDuration" column="rental_duration" />
+		<result property="length" column="length" />
+		<result property="replacementCost" column="replacement_cost" />
+		<result property="rating" column="rating" />
+		<result property="specialFeatures" column="special_features" />
+	</resultMap>
+
+	<select id="selectById" parameterType="int" resultMap="result">
+		SELECT * FROM Film WHERE ID = #{id};
+	</select>
+</mapper>

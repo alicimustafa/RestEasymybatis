@@ -1,4 +1,4 @@
-package com.mustafa.app;
+package com.mustafa.app.webservice;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
