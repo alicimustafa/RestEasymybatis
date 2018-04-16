@@ -19,7 +19,6 @@ public class FilmWebService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Film getFilmById(@PathParam("id") String id) {
 		Film film = filmService.getFilmById(id);
-		System.out.println("film title" + film.getTitle());
 		return film;
 	}
 	
