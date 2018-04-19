@@ -12,7 +12,11 @@ import com.mustafa.app.entity.Film;
 @Path("/film")
 public class FilmWebService {
 
-	private final FilmDataService filmService = FilmDataService.getInstance();
+	private final FilmDataService filmService;
+	
+	public FilmWebService(FilmDataService filmService) {
+		this.filmService = filmService;
+	}
 	
 	@GET
 	@Path("/{id}")

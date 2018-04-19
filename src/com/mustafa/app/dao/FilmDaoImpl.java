@@ -6,17 +6,18 @@ import com.mustafa.app.entity.Film;
 
 import mappers.FilmMapper;
 
-public class DaoFilm extends Dao {
+public class FilmDaoImpl extends Dao implements FilmDao{
 	
-	private final static DaoFilm INSTANCE = new DaoFilm();
+	private final static FilmDao INSTANCE = new FilmDaoImpl();
 	
-	public static DaoFilm getInstance()	{
+	public static FilmDao getInstance()	{
 		return INSTANCE;
 	}
 	
-	private DaoFilm() {
+	private FilmDaoImpl() {
 	}
 	
+	@Override
 	public Film getFilmById(int id) {
 		SqlSession session = sqlSessionFactory.openSession();
 		Film film = null;

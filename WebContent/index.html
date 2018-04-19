@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!--Angular dependency  -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-route.min.js"></script>
+	<script src="node_modules/angular/angular.min.js"></script>
+	<script src="node_modules/angular-route/angular-route.min.js"></script>
 <!--App Module-->
 	<script src="app/app.module.js"></script>
 	<script src="app/home/home.module.js"></script>
@@ -14,11 +14,13 @@
 <!--App directives-->
 	<script src="app/directives/directive.elementRepeat.js"></script>
 	<script src="app/directives/directive.clock.js"></script>
+	<script src="app/directives/directive.lkrepeat.js"></script>
 <!--App components-->
 	<script src="app/home/component.home.js"></script>
+	
+	
 </head>
 <body>
-	<h1>web app</h1>
 	<ng-view></ng-view>
 </body>
 </html>
