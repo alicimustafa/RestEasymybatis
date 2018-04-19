@@ -1,5 +1,7 @@
 package com.mustafa.app.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.mustafa.app.entity.Film;
@@ -30,5 +32,20 @@ public class FilmDaoImpl extends Dao implements FilmDao{
 			session.close();
 		}
 		return film;
+	}
+
+	@Override
+	public List<Film> getAllFilms() {
+		SqlSession session = sqlSessionFactory.openSession();
+		List<Film> films = null;
+		try {
+			FilmMapper mapper = session.getMapper(FilmMapper.class);
+			films = mapper.getAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return films;
 	}
 }

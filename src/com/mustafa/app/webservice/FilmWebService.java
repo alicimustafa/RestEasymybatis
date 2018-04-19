@@ -1,5 +1,7 @@
 package com.mustafa.app.webservice;
 
+import java.util.List;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -10,6 +12,7 @@ import com.mustafa.app.dataservice.FilmDataService;
 import com.mustafa.app.entity.Film;
 
 @Path("/film")
+@Produces(MediaType.APPLICATION_JSON)
 public class FilmWebService {
 
 	private final FilmDataService filmService;
@@ -20,10 +23,14 @@ public class FilmWebService {
 	
 	@GET
 	@Path("/{id}")
-	@Produces(MediaType.APPLICATION_JSON)
 	public Film getFilmById(@PathParam("id") String id) {
 		Film film = filmService.getFilmById(id);
 		return film;
+	}
+	
+	@GET
+	public List<Film> getAllFilms(){
+		return filmService.getAllFilms();
 	}
 	
 }
