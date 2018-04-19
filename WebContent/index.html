@@ -9,18 +9,30 @@
 <!--App Module-->
 	<script src="app/app.module.js"></script>
 	<script src="app/home/home.module.js"></script>
+	<script src="app/navbar/navbar.module.js"></script>
+	<script src="app/movies/movies.module.js"></script>
+	<script src="app/actors/actors.module.js"></script>
+	<script src="app/error/error.module.js"></script>
 <!--App config-->
 	<script src="app/app.config.js"></script>
 <!--App directives-->
 	<script src="app/directives/directive.elementRepeat.js"></script>
 	<script src="app/directives/directive.clock.js"></script>
 	<script src="app/directives/directive.lkrepeat.js"></script>
-<!--App components-->
-	<script src="app/home/component.home.js"></script>
-	
+<!--App controllers-->
+	<script src="app/home/home.controller.js"></script>
+	<script src="app/navbar/navbar.controller.js"></script>
+	<script src="app/movies/movies.controller.js"></script>
+	<script src="app/actors/actors.controller.js"></script>
+	<script src="app/error/error.controller.js"></script>
 	
 </head>
 <body>
+	<nav ng-controller="navController">
+		<a href="#!/">Home</a>
+		<a href="#!/movies">Movies</a>
+		<a href="#!/actors">Actors</a>
+	</nav>
 	<ng-view></ng-view>
 </body>
 </html>

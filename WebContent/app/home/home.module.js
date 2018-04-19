@@ -1,3 +1,8 @@
-angular.module('homeModule',[
-
-]);
+(function(){
+	
+	'use stricy';
+	
+	angular.module('homeModule',[
+		
+	]);
+})();
