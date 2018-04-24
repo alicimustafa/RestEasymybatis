@@ -17,6 +17,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import com.mustafa.app.dao.FilmDao;
 import com.mustafa.app.entity.Film;
+import com.mustafa.app.entity.FilmShort;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FilmDataServiceTest {
@@ -68,4 +69,16 @@ public class FilmDataServiceTest {
 		assertEquals(2, filmDataService.getAllFilms().size());
 		assertEquals("fun movie", filmDataService.getAllFilms().get(1).getTitle());
 	}
+	
+	public void test_getPageAll_returns_list_of_filmShort_if_correct_page_value() {
+		List<FilmShort> films = new ArrayList<>();
+		films.add(new FilmShort(1L,"my movie",Date.valueOf("2000-1-1"),120,"R"));
+		films.add(new FilmShort(3L,"cool movie",Date.valueOf("2010-1-1"),90,"PG"));
+		films.add(new FilmShort(10L,"stuff",Date.valueOf("2012-1-1"),70,"NC-17"));
+		when(mockDao.getPageFilm(21)).thenReturn(films);
+		assertEquals(3, filmDataService.getPageAll("2"));
+		assertEquals("stuff", filmDataService.getPageAll("2").get(2).getTitle());
+		
+	}
+	
 }

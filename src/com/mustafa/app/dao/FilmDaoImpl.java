@@ -4,9 +4,12 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.mustafa.app.dto.Page;
 import com.mustafa.app.entity.Film;
+import com.mustafa.app.entity.FilmShort;
 
 import mappers.FilmMapper;
+import mappers.FilmShortMapper;
 
 public class FilmDaoImpl extends Dao implements FilmDao{
 	
@@ -48,4 +51,47 @@ public class FilmDaoImpl extends Dao implements FilmDao{
 		}
 		return films;
 	}
+
+	@Override
+	public List<FilmShort> AllpageOrder(Page page) {
+		SqlSession session = sqlSessionFactory.openSession();
+		List<FilmShort> films = null;
+		try {
+			FilmShortMapper mapper = session.getMapper(FilmShortMapper.class);
+			films = mapper.AllpageOrder(page);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return films;
+	}
+
+	@Override
+	public List<FilmShort> AllpageOrderRatingAsc(int page) {
+		SqlSession session = sqlSessionFactory.openSession();
+		List<FilmShort> films = null;
+		try {
+			FilmShortMapper mapper = session.getMapper(FilmShortMapper.class);
+			films = mapper.AllpageOrderRatingAsc(page);
+		} catch(Exception e) {
+			session.close();
+		}
+		return films;
+	}
+
+	@Override
+	public List<FilmShort> AllpageOrderRatingDesc(int page) {
+		SqlSession session = sqlSessionFactory.openSession();
+		List<FilmShort> films = null;
+		try {
+			FilmShortMapper mapper = session.getMapper(FilmShortMapper.class);
+			films = mapper.AllpageOrderRatingDesc(page);
+		} catch(Exception e) {
+			session.close();
+		}
+		return films;
+	}
+
+
 }

@@ -1,0 +1,43 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace= "mappers.FilmShortMapper">
+
+	<resultMap id="short" type="FilmShort">
+		<result property="id" column="id" />
+		<result property="title" column="title" />
+		<result property="releaseYear" column="release_year" />
+		<result property="length" column="length" />
+		<result property="rating" column="rating" />
+	</resultMap>
+	
+	<select id="AllpageOrder" parameterType="com.mustafa.app.Page" resultMap="short">
+		SELECT id, title, release_year, length, rating 
+		FROM Film ORDER BY ${order} ${dir} LIMIT #{page}, 20
+	</select>
+	<select id="AllpageOrderRatingAsc" parameterType="int" resultMap="short">
+		SELECT id, title, release_year, length, rating 
+		FROM Film ORDER BY 
+        		CASE
+   				WHEN rating ='G' THEN 5
+    			WHEN rating ='PG' THEN 4
+    			WHEN rating ='PG-13' THEN 3
+    			WHEN rating ='R' THEN 2
+    			WHEN rating ='NC-17' THEN 1
+    			ELSE 0
+				END DESC LIMIT #{page}, 20
+	</select>
+	<select id="AllpageOrderRatingDesc" parameterType="int" resultMap="short">
+		SELECT id, title, release_year, length, rating 
+		FROM Film ORDER BY 
+        		CASE
+   				WHEN rating ='G' THEN 5
+    			WHEN rating ='PG' THEN 4
+    			WHEN rating ='PG-13' THEN 3
+    			WHEN rating ='R' THEN 2
+    			WHEN rating ='NC-17' THEN 1
+    			ELSE 0
+				END ASC LIMIT #{page}, 20
+	</select>
+</mapper>

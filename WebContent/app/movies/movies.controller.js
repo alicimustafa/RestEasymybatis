@@ -9,5 +9,8 @@
 	
 	function movieController($routeParams){
 		var vm = this;
+		var movies = [];
+		var movie = null;
+		
 	}
 })();

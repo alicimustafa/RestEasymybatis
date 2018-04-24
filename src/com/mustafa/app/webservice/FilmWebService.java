@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.mustafa.app.dataservice.FilmDataService;
 import com.mustafa.app.entity.Film;
+import com.mustafa.app.entity.FilmShort;
 
 @Path("/film")
 @Produces(MediaType.APPLICATION_JSON)
@@ -31,6 +32,15 @@ public class FilmWebService {
 	@GET
 	public List<Film> getAllFilms(){
 		return filmService.getAllFilms();
+	}
+	
+	@GET
+	@Path("/short/{order}/{dir}/{page}")
+	public List<FilmShort> getFilmShortPage(
+			@PathParam("dir") String dir,
+			@PathParam("page") String page,
+			@PathParam("order") String order){
+		return filmService.getPageAll(page, order, dir);
 	}
 	
 }
