@@ -25,14 +25,18 @@ public class FilmDataService {
 	}
 	
 	public List<FilmShort> getPageAll(String page, String order, String dir){
+		System.out.println(page);
+		System.out.println(order);
+		System.out.println(dir);
 		try {
 			int num = (Integer.parseInt(page) -1) * 20;
 			String orderBy = null;
 			String direction = null;
-			if(dir.equals("acs")) {
+			if(dir.equals("asc")) {
 				direction = "ASC";
 			} else if(dir.equals("des")) {
-				direction = "DECS";
+				System.out.println("in desc");
+				direction = "DESC";
 			} 
 			switch(order) {
 			case "title": 
@@ -45,14 +49,18 @@ public class FilmDataService {
 				orderBy = "length";
 				break;
 			case "rating":
-				if(dir.equals("acs")) {
+				System.out.println("in rating");
+				if(dir.equals("asc")) {
+					System.out.println("in rating asc");
 					return filmDao.AllpageOrderRatingAsc(num);
 				} else if(dir.equals("des")) {
 					return filmDao.AllpageOrderRatingDesc(num);
 				} 
 				break;
 			}
-			
+			System.out.println(num);
+			System.out.println(orderBy);
+			System.out.println(direction);
 			Page pageObj = new Page(num, orderBy, direction);
 			return filmDao.AllpageOrder(pageObj);
 		} catch(Exception e) {
