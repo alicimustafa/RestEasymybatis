@@ -1,22 +1,26 @@
 <h1>Movie area</h1>
-
-<h3>Get list of movies</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Release Year</th>
-      <th>Running Time</th>
-      <th>Rating</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="movie in movies">
-      <td><a href="#!/movies/{{movie.id}}">{{movie.title}}</a></td>
-      <td>{{movie.releaseYear}}</td>
-      <td>{{movie.length}}</td>
-      <td>{{movie.rating}}</td>
-    </tr>
-  </tbody>
-</table>
+<div ng-hide="vm.movie">
+	<h3>List of movies</h3>
+	
+	<table>
+	  <thead>
+	    <tr>
+	      <th>Title</th>
+	      <th>Release Year</th>
+	      <th>Running Time</th>
+	      <th>Rating</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr ng-repeat="movie in vm.movies">
+	      <td><a href="#!/movies/{{movie.id}}">{{movie.title}}</a></td>
+	      <td>{{movie.releaseYear}}</td>
+	      <td>{{movie.length}}</td>
+	      <td>{{movie.rating}}</td>
+	    </tr>
+	  </tbody>
+	</table>
+</div>
+<div ng-show="vm.movie">
+	<h3>Movie information</h3>
+</div>

@@ -5,12 +5,21 @@
 	angular.module('movieModule')
 	.controller('movieController', movieController);
 	
-	movieController.$inject = ['$routeParams'];
+	movieController.$inject = ['$routeParams','movieService'];
 	
 	function movieController($routeParams){
 		var vm = this;
-		var movies = [];
-		var movie = null;
+		vm.movies = [];
+		vm.movie = null;
 		
+		console.log($routeParams.id);
+		refresh();
+		function refresh(){
+			if($routeParams.id){
+				
+			} else {
+				
+			}
+		}
 	}
 })();

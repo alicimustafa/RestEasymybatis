@@ -9,5 +9,10 @@
 	
 	function homeController(){
 		var vm = this;
+		vm.formInfo = {};
+		
+		vm.submit = function(){
+			console.log(vm.formInfo);
+		}
 	}
 })();
