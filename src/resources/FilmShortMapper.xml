@@ -12,6 +12,10 @@
 		<result property="rating" column="rating" />
 	</resultMap>
 
+	<select id="count" resultType="int">
+		SELECT COUNT(*) c FROM Film
+	</select>
+	
 	<select id="AllpageOrder" parameterType="com.mustafa.app.dto.Page"
 		resultMap="short">
 		SELECT id, title, release_year, length, rating

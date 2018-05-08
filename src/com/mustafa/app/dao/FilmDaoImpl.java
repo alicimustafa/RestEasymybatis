@@ -93,5 +93,15 @@ public class FilmDaoImpl extends Dao implements FilmDao{
 		return films;
 	}
 
+	@Override
+	public int getAllCount() {
+		// TODO Auto-generated method stub
+		SqlSession session = sqlSessionFactory.openSession();
+		int count = 0;
+		FilmShortMapper mapper = session.getMapper(FilmShortMapper.class);
+		count = mapper.count();
+		return count;
+	}
+
 
 }

@@ -9,5 +9,5 @@ public interface FilmShortMapper {
 	List<FilmShort> AllpageOrder(Page page);
 	List<FilmShort> AllpageOrderRatingAsc(int page);
 	List<FilmShort> AllpageOrderRatingDesc(int page);
-	
+	int count();
 }

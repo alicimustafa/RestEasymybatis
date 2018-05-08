@@ -171,19 +171,25 @@ public class FilmDataServiceTest {
 		films.add(new FilmShort(1L, "fun", Date.valueOf("2000-1-1"), 90, "R"));
 		films.add(new FilmShort(2L, "boring", Date.valueOf("1990-1-1"), 80, "G"));
 		films.add(new FilmShort(3L, "stuf", Date.valueOf("2010-1-1"), 120, "PG"));
+		
 		Page page = new Page(0, "release_year", "ASC");
+		
 		when(mockDao.AllpageOrder(page)).thenReturn(films);
-		assertEquals(3, filmDataService.getPageAll("1", "year", "asc").size());
-		assertEquals("fun", filmDataService.getPageAll("1", "year", "asc").get(0).getTitle());
+		when(mockDao.getAllCount()).thenReturn(3);
+		
+		assertEquals(3, filmDataService.getPageAll("1", "year", "asc").getFilms().size());
+		assertEquals(1, filmDataService.getPageAll("1", "year", "asc").getPages());
+		assertEquals("fun", filmDataService.getPageAll("1", "year", "asc")
+				.getFilms().get(0).getTitle());
 		assertEquals(Date.valueOf("2010-1-1"), 
 				filmDataService.getPageAll("1", "year", "asc")
-				.get(2).getReleaseYear());
+				.getFilms().get(2).getReleaseYear());
 		assertEquals(90, 
 				filmDataService.getPageAll("1", "year", "asc")
-				.get(0).getLength().intValue());
+				.getFilms().get(0).getLength().intValue());
 		assertEquals("G", 
 				filmDataService.getPageAll("1", "year", "asc")
-				.get(1).getRating());
-		verify(mockDao, times(5)).AllpageOrder(page);
+				.getFilms().get(1).getRating());
+		verify(mockDao, times(6)).AllpageOrder(page);
 	}
 }

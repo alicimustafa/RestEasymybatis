@@ -25,6 +25,7 @@ import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.skyscreamer.jsonassert.comparator.ArraySizeComparator;
 
 import com.mustafa.app.dataservice.FilmDataService;
+import com.mustafa.app.dto.ReturnPage;
 import com.mustafa.app.entity.Film;
 import com.mustafa.app.entity.FilmShort;
 import com.mustafa.app.webservice.FilmWebService;
@@ -54,23 +55,21 @@ public class FilmWebServiceTest {
 				"my movie", "stuff", Date.valueOf("2000-1-1"), 3, 4, 
 				BigDecimal.valueOf(1.99), 120, BigDecimal.valueOf(15.99), 
 				"R", "none");
-		String expected = "{id:1,title:\"my movie\",description:\"stuff\","
+		String expected = "{data:{id:1,title:\"my movie\",description:\"stuff\","
 				+ "releaseYear:\"2000-01-01\", languageId:3,rentalDuration:4,"
 				+ "rentalRate:1.99,length:120,replacementCost:15.99,rating:\"R\","
-				+ "specialFeatures:\"none\"}";
+				+ "specialFeatures:\"none\"}}";
 		when(fds.getFilmById("1")).thenReturn(film);
 		try {
 			MockHttpRequest request = MockHttpRequest.get("/film/1");
 			MockHttpResponse response = new MockHttpResponse();
 			dispatcher.invoke(request, response);
 			assertEquals(200, response.getStatus());
-			JSONAssert.assertEquals(expected, response.getContentAsString(), true);
+			JSONAssert.assertEquals(expected, response.getContentAsString(), false);
 		
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -92,9 +91,9 @@ public class FilmWebServiceTest {
 			MockHttpResponse response = new MockHttpResponse();
 			dispatcher.invoke(request, response);
 			assertEquals(200, response.getStatus());
-			JSONAssert.assertEquals("[2]", response.getContentAsString(), 
+			JSONAssert.assertEquals("{data:[2]}", response.getContentAsString(), 
 					new ArraySizeComparator(JSONCompareMode.LENIENT));
-			JSONAssert.assertEquals("[{title:\"my movie\",description:\"stuff\"},{title:\"big dude\", description:\"funny\"}]", 
+			JSONAssert.assertEquals("{data:[{title:\"my movie\",description:\"stuff\"},{title:\"big dude\", description:\"funny\"}]}", 
 					response.getContentAsString(), false);
 		} catch (URISyntaxException e) {
 			fail();
@@ -112,15 +111,18 @@ public class FilmWebServiceTest {
 		films.add(new FilmShort(2l, "mov2", Date.valueOf("2010-1-1"), 70, "PG"));
 		films.add(new FilmShort(3l, "mov3", Date.valueOf("2015-1-1"), 320, "R"));
 		films.add(new FilmShort(4l, "mov4", Date.valueOf("1999-1-1"), 220, "G"));
-		when(fds.getPageAll("1", "stuf", "asc")).thenReturn(films);
+		ReturnPage ret = new ReturnPage();
+		ret.setFilms(films);
+		ret.setPages(1);
+		when(fds.getPageAll("1", "stuf", "asc")).thenReturn(ret);
 		try {
 			MockHttpRequest req = MockHttpRequest.get("/film/short/stuf/asc/1");
 			MockHttpResponse res = new MockHttpResponse();
 			dispatcher.invoke(req, res);
 			assertEquals(200, res.getStatus());
-			JSONAssert.assertEquals("[4]", res.getContentAsString(), 
+			JSONAssert.assertEquals("{data:{films:[4]}}", res.getContentAsString(), 
 					new ArraySizeComparator(JSONCompareMode.LENIENT));
-			JSONAssert.assertEquals("[{id:1,length:120},{id:2},{id:3},{id:4}]", 
+			JSONAssert.assertEquals("{data:{films:[{id:1,length:120},{id:2},{id:3},{id:4}]}}", 
 					res.getContentAsString(), false);
 		} catch (URISyntaxException e) {
 			fail();

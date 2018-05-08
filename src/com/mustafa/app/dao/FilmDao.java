@@ -12,5 +12,6 @@ public interface FilmDao {
 	List<FilmShort> AllpageOrder(Page page);
 	List<FilmShort> AllpageOrderRatingAsc(int page);
 	List<FilmShort> AllpageOrderRatingDesc(int page);
+	int getAllCount();
 
 }
