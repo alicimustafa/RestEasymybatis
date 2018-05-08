@@ -1,25 +1,62 @@
 <h1>Movie area</h1>
 <div ng-hide="vm.movie">
 	<h3>List of movies</h3>
-	
-	<table>
-	  <thead>
-	    <tr>
-	      <th>Title</th>
-	      <th>Release Year</th>
-	      <th>Running Time</th>
-	      <th>Rating</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	    <tr ng-repeat="movie in vm.movies">
-	      <td><a href="#!/movies/{{movie.id}}">{{movie.title}}</a></td>
-	      <td>{{movie.releaseYear}}</td>
-	      <td>{{movie.length}}</td>
-	      <td>{{movie.rating}}</td>
-	    </tr>
-	  </tbody>
+
+	<table class="table movie-list">
+		<thead>
+			<tr>
+				<th>Title
+					<span ng-class="{select: vm.col === 'title' && vm.dir === 'asc'}" 
+						ng-click="vm.sortMovies('title','asc')">&#9660;</span>
+					<span ng-class="{select: vm.col === 'title' && vm.dir === 'des'}"
+						ng-click="vm.sortMovies('title','des')">&#9650;</span>
+				</th>
+				<th>Release Year
+					<span ng-class="{select: vm.col === 'year' && vm.dir === 'asc'}"
+						ng-click="vm.sortMovies('year','asc')">&#9660;</span>
+					<span ng-class="{select: vm.col === 'year' && vm.dir === 'des'}"
+						ng-click="vm.sortMovies('year','des')">&#9650;</span>
+				</th>
+				<th>Running Time
+					<span ng-class="{select: vm.col === 'length' && vm.dir === 'asc'}"
+						ng-click="vm.sortMovies('length','asc')">&#9660;</span>
+					<span ng-class="{select: vm.col === 'length' && vm.dir === 'des'}"
+						ng-click="vm.sortMovies('length','des')">&#9650;</span>
+				</th>
+				<th>Rating
+					<span ng-class="{select: vm.col === 'rating' && vm.dir === 'asc'}"
+						ng-click="vm.sortMovies('rating','asc')">&#9660;</span>
+					<span ng-class="{select: vm.col === 'rating' && vm.dir === 'des'}"
+						ng-click="vm.sortMovies('rating','des')">&#9650;</span>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="movie in vm.movies">
+				<td><a href="#!/movies/{{movie.id}}">{{movie.title}}</a></td>
+				<td>{{movie.releaseYear}}</td>
+				<td>{{movie.length}}</td>
+				<td>{{movie.rating}}</td>
+			</tr>
+		</tbody>
 	</table>
+	<ul ng-if="vm.pager.pages.length" class="pagination">
+		<li class="page-item" ng-class="{disabled:vm.currentPage === 1}" >
+			<a class="page-link" ng-click="vm.setPage(1)">First</a>
+		</li>
+		<li class="page-item" ng-class="{disabled:vm.currentPage === 1}">
+			<a class="page-link" ng-click="vm.setPage(vm.currentPage - 1)">Previous</a>
+		</li>
+		<li class="page-item" ng-repeat="page in vm.pager.pages" ng-class="{active:vm.currentPage === page}">
+			<a class="page-link" ng-click="vm.setPage(page)">{{page}}</a>
+		</li>
+		<li class="page-item" ng-class="{disabled:vm.currentPage === vm.pager.totalPages}">
+			<a class="page-link" ng-click="vm.setPage(vm.currentPage + 1)">Next</a>
+		</li>
+		<li class="page-item" ng-class="{disabled:vm.currentPage === vm.pager.totalPages}">
+			<a class="page-link" ng-click="vm.setPage(vm.totalPages)">Last</a>
+		</li>
+	</ul>
 </div>
 <div ng-show="vm.movie">
 	<h3>Movie information</h3>

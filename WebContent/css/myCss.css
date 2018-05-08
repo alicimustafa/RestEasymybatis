@@ -1,0 +1,9 @@
+.movie-list span {
+    float: right;
+    margin: 0.5em;
+    cursor: pointer;
+}
+
+.select {
+    color: #2d7de6;
+}

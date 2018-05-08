@@ -2,10 +2,18 @@
 <html ng-app="appModule">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="node_modules/bootstrap-css-only/css/bootstrap-reboot.min.css">
+<link rel="stylesheet" href="node_modules/bootstrap-css-only/css/bootstrap.min.css">
+<link rel="stylesheet" href="node_modules/bootstrap-css-only/css/bootstrap-grid.min.css">
+<link rel="stylesheet" href="bootstrap/ui-bootstrap-custom-2.5.0-csp.css">
+<link rel="stylesheet" href="css/myCss.css">
 <title>My Movie site</title>
 <!--Angular dependency  -->
 	<script src="node_modules/angular/angular.min.js"></script>
 	<script src="node_modules/angular-route/angular-route.min.js"></script>
+<!--Angular Bootstap UI  -->
+	<script src="bootstrap/ui-bootstrap-custom-2.5.0.min.js"></script>
+	<script src="bootstrap/ui-bootstrap-custom-tpls-2.5.0.min.js"></script>
 <!--App Module-->
 	<script src="app/app.module.js"></script>
 	<script src="app/home/home.module.js"></script>
@@ -19,6 +27,9 @@
 	<script src="app/directives/directive.elementRepeat.js"></script>
 	<script src="app/directives/directive.clock.js"></script>
 	<script src="app/directives/directive.lkrepeat.js"></script>
+<!--App services  -->
+	<script src="app/services/paging.service.js"></script>
+	<script src="app/movies/movies.service.js"></script>
 <!--App controllers-->
 	<script src="app/home/home.controller.js"></script>
 	<script src="app/navbar/navbar.controller.js"></script>

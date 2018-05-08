@@ -9,13 +9,14 @@
 
   function movieService($http){
     var services = {
-
+    		getMoviesPage: getMoviesPage
     };
 
-    function getMoviesPage(page, filter){
+    function getMoviesPage(page, order, dir){
+    	console.log(order+" "+dir+" "+page);
       return $http({
         method : 'GET',
-				url : `services/film/short/${filter}/${page}`
+				url : `services/film/short/${order}/${dir}/${page}`
       });
     }
     return services;

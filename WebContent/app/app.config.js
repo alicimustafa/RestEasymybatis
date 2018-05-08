@@ -13,7 +13,7 @@
 			templateUrl : 'app/movies/movies.template.html',
 			controller : 'movieController',
 			controllerAs : 'vm'
-		}).when('/movies/:id', {
+		}).when('/movie/:id', {
 			templateUrl : 'app/movies/movies.template.html',
 			controller : 'movieController',
 			controllerAs : 'vm'
